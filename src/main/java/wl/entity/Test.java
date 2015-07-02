@@ -1,15 +1,23 @@
 package wl.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "t_demo")
 public class Test {
 
-	private String id;
+	@Id
+	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
+	private Long id;
+	@Column(name = "login_name", length = 100)
 	private String loginName;
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -21,4 +29,8 @@ public class Test {
 		this.loginName = loginName;
 	}
 
+	@Override
+	public String toString() {
+		return "User{" + "id=" + id + ", loginName='" + loginName + '}';
+	}
 }

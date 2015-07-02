@@ -10,9 +10,14 @@
 	<constant name="struts.action.extension" value="do" />
 	<!-- 把主题设为simple -->
 	<constant name="struts.ui.theme" value="simple" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.objectFactory" value="spring"/>
 	<package name="test" namespace="/" extends="struts-default">
-		<action name="test" class="wl.action.TestAction">
-			<result>/apps/index.jsp</result>
+		<action name="*" class="wl.action.TestAction" method="{1}">
+			<result name="add">/apps/add.jsp</result>
+			<result name="edit">/apps/edit.jsp</result>
+			<result name="list">/apps/list.jsp</result>
+			<result name="toList" type="redirect">/apps/list.jsp</result>
 		</action>
 	</package>
 </struts>

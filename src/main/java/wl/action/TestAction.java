@@ -1,7 +1,17 @@
 package wl.action;
 
+import javax.annotation.Resource;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+
 import com.opensymphony.xwork2.ActionSupport;
 
+import wl.entity.Test;
+import wl.service.TestService;
+
+@Controller
+@Scope("prototype")
 public class TestAction extends ActionSupport {
 
 	/**
@@ -9,8 +19,51 @@ public class TestAction extends ActionSupport {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Override
-	public String execute() throws Exception {
-		return SUCCESS;
+	@Resource
+	private TestService testService;
+	private Test test;
+	private Long id;
+
+	public String add() {
+		return "add";
 	}
+
+	public String save() {
+		testService.save(test);
+		return "toList";
+	}
+
+	public String edit() {
+		return "edit";
+	}
+
+	public String update() {
+		return "toList";
+	}
+
+	public String delete() {
+		testService.delete(id);
+		return "toList";
+	}
+
+	public String list() {
+		return "list";
+	}
+
+	public Test getTest() {
+		return test;
+	}
+
+	public void setTest(Test test) {
+		this.test = test;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 }
