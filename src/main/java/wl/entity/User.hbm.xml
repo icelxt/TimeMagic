@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="wl.entity">
+
+	<class name="Test" table="test">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="loginName" column="loginName"></property>
+
+
+		<!-- department属性，表示我与Department的多对一关系 -->
+		<!-- <many-to-one name="department" class="Department" column="departmentId"></many-to-one> -->
+
+
+		<!-- roles属性，表示我与Role的多对多关系 -->
+		<!-- <set name="roles" table="itcast_user_role"> <key column="userId"></key> 
+			<many-to-many class="Role" column="roleId"></many-to-many> </set> -->
+
+	</class>
+
+</hibernate-mapping>
