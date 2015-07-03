@@ -22,7 +22,7 @@ public class TestAction extends ActionSupport {
 	@Resource
 	private TestService testService;
 	private Test test;
-	private Long id;
+	private String id;
 
 	public String add() {
 		return "add";
@@ -58,11 +58,11 @@ public class TestAction extends ActionSupport {
 		this.test = test;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

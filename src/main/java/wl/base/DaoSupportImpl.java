@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,8 +45,8 @@ public abstract class DaoSupportImpl<T> implements DaoSupport<T> {
 		getSession().update(entity);
 	}
 
-	public void delete(Long id) {
-		if (id == null) {
+	public void delete(String id) {
+		if (StringUtils.isBlank(id)) {
 			return;
 		}
 		Object entity = getById(id);
@@ -54,7 +55,7 @@ public abstract class DaoSupportImpl<T> implements DaoSupport<T> {
 		}
 	}
 	@Transactional(readOnly=true)
-	public T getById(Long id) {
+	public T getById(String id) {
 		if (id == null) {
 			return null;
 		} else {
@@ -62,7 +63,7 @@ public abstract class DaoSupportImpl<T> implements DaoSupport<T> {
 		}
 	}
 
-	public List<T> getByIds(Long[] ids) {
+	public List<T> getByIds(String[] ids) {
 		if(ids == null || ids.length == 0){
 			return Collections.EMPTY_LIST;
 		}

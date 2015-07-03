@@ -2,22 +2,27 @@ package wl.entity;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name = "t_demo")
 public class Test {
 
+//	@Id
+//	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+//	@Column(name = "id", unique = true, nullable = false)
 	@Id
-	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
-	private Long id;
+	@GeneratedValue(generator = "idGenerator")
+	@GenericGenerator(name = "idGenerator", strategy = "uuid")
+	private String id;
 	@Column(name = "login_name", length = 100)
 	private String loginName;
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

@@ -12,7 +12,7 @@
 		<table>
 			<tr>
 				<td>用户名:</td>
-				<td><s:textfield name="test.id"></s:textfield></td>
+				<td><s:textfield name="test.loginName"></s:textfield></td>
 			</tr>
 		</table>
 		<s:submit>提交</s:submit>

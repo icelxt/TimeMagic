@@ -14,7 +14,7 @@ public interface DaoSupport<T> {
 	 * 删除实体
 	 * @param id
 	 */
-	void delete(Long id);
+	void delete(String id);
 
 	/**
 	 * 更新实体
@@ -27,14 +27,14 @@ public interface DaoSupport<T> {
 	 * @param id
 	 * @return
 	 */
-	T getById(Long id);
+	T getById(String id);
 	
 	/**
 	 * 根据id数组查询多个
 	 * @param ids
 	 * @return
 	 */
-	List<T> getByIds(Long[] ids);
+	List<T> getByIds(String[] ids);
 
 
 	/**
