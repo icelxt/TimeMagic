@@ -46,7 +46,7 @@
 		value="100"/> </bean> -->
 
 	<!-- 配置SessionFactory -->
-	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"><!-- org.springframework.orm.hibernate3.LocalSessionFactoryBean -->
 		<property name="dataSource" ref="dataSource"></property>
 		<!-- <property name="configLocation" value="classpath:hibernate.cfg.xml"></property> -->
 		<property name="hibernateProperties">
@@ -59,6 +59,11 @@
 			</props>
 		</property>
 		<property name="packagesToScan" value="wl.entity" />
+		<!-- <property name="packagesToScan">
+			<list>
+				<value>wl.entity</value>
+			</list>
+		</property> -->
 	</bean>
 
 	<!-- 配置声明式的事务管理（采用基于注解的方式） -->
