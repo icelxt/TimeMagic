@@ -1,10 +1,15 @@
 package wl.action;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import wl.entity.Test;
@@ -47,6 +52,15 @@ public class TestAction extends ActionSupport {
 	}
 
 	public String list() {
+		test = new Test();
+		test.setId("123");
+		test.setLoginName("your Name");
+		List<Test> list = new ArrayList<Test>();
+		list.add(test);
+		list.add(test);
+		list.add(test);
+		list.add(test);
+		ServletActionContext.getRequest().setAttribute("list", list);
 		return "list";
 	}
 
