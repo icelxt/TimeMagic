@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -21,7 +21,7 @@
 				<td>操作</td>
 			</tr>
 		</thead>
-		<s:iterator value="#request.list" status="status">
+		<s:iterator value="list" status="status">
 			<tr>
 				<td><s:property value="#status.index+1"/></td>
 				<td><s:property value="id"/></td>

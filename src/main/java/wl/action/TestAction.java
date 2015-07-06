@@ -60,7 +60,8 @@ public class TestAction extends ActionSupport {
 		list.add(test);
 		list.add(test);
 		list.add(test);
-		ServletActionContext.getRequest().setAttribute("list", list);
+		//ServletActionContext.getRequest().setAttribute("list", list);
+		ActionContext.getContext().getValueStack().push(list);
 		return "list";
 	}
 
