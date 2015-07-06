@@ -68,8 +68,9 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>3.0.5.RELEASE</version>
 		</dependency>
+		<!-- 解决警告:The artifact org.apache.commons:commons-io:jar:1.3.2 has been relocated to commons-io:commons-io:jar:1.3.2<groupId>org.apache.commons</groupId>改 -->
 		<dependency>
-			<groupId>org.apache.commons</groupId>
+			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>1.3.2</version>
 		</dependency>
@@ -82,4 +83,21 @@
 		<!-- <dependency> <groupId>springframework</groupId> <artifactId>spring</artifactId> 
 			<version>2.0-M4</version> </dependency> -->
 	</dependencies>
+	<!-- 解决警告:默认编码为gbk -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<!-- 解决警告:File encoding has not been set, using platform encoding GBK, i.e. build is platform dependent -->
+	<properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 </project>
