@@ -12,12 +12,20 @@
 	<constant name="struts.ui.theme" value="simple" />
 	<constant name="struts.i18n.encoding" value="UTF-8" />
 	<constant name="struts.objectFactory" value="spring"/>
-	<package name="test" namespace="/" extends="struts-default">
-		<action name="*" class="wl.action.TestAction" method="{1}">
-			<result name="add">/apps/add.jsp</result>
-			<result name="edit">/apps/edit.jsp</result>
-			<result name="list">/apps/list.jsp</result>
-			<result name="toList" type="redirect">/apps/list.jsp</result>
+	<package name="test" namespace="/test" extends="struts-default">
+		<action name="*" class="testAction" method="{1}">
+			<result name="add">/apps/test/add.jsp</result>
+			<result name="edit">/apps/test/edit.jsp</result>
+			<result name="list">/apps/test/list.jsp</result>
+			<result name="toList" type="redirect">list.action</result>
+		</action>
+	</package>
+	<package name="user" namespace="/user" extends="struts-default"><!-- 拦截器中验证是否登陆 -->
+		<action name="*" class="userAction" method="{1}">
+			<result name="add">/apps/user/add.jsp</result>
+			<result name="edit">/apps/user/edit.jsp</result>
+			<result name="list">/apps/user/list.jsp</result>
+			<result name="toList" type="redirect">list.do</result>
 		</action>
 	</package>
 </struts>
