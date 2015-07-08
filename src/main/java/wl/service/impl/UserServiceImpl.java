@@ -16,7 +16,7 @@ import wl.service.UserService;
 public class UserServiceImpl extends DaoSupportImpl<User> implements UserService {
 
 	/**
-	 * ¸ù¾İĞÕÃû²éÑ¯ÓÃ»§
+	 * æ ¹æ®å§“åæŸ¥è¯¢ç”¨æˆ·
 	 * @return
 	 */
 	public List<User> getUserByName(String name){
@@ -28,6 +28,6 @@ public class UserServiceImpl extends DaoSupportImpl<User> implements UserService
 		return list;
 	}
 	/**
-	 * Ğ´ÅĞ¶Ï Æ´½Ó¸üĞÂÊôĞÔ£¿
+	 * å†™åˆ¤æ–­ æ‹¼æ¥æ›´æ–°å±æ€§ï¼Ÿ
 	 */
 }

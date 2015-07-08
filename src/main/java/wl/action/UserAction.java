@@ -36,7 +36,7 @@ public class UserAction extends ActionSupport {
 	public String save() {
 		Calendar calendar = Calendar.getInstance();
 		user.setCreateTime(calendar.getTime());
-		//TODO ÒÔºóÍ¨¹ıÊ±¼ä¿Ø¼ş¸³Öµ
+		//TODOä»¥åé€šè¿‡æ—¶é—´æ§ä»¶èµ‹å€¼
 		user.setBirthday(calendar.getTime());
 		userService.save(user);
 		return "toList";

@@ -19,7 +19,7 @@ public class User {
 	@GenericGenerator(name = "idGenerator", strategy = "uuid")
 	private String id;
 	/*
-	 * updatable=false添加这个属性，update时不更新
+	 * updatable=false娣诲姞杩欎釜灞炴�э紝update鏃朵笉鏇存柊
 	 */
 	@Column(name = "login_name", length = 50)
 	private String loginName;
