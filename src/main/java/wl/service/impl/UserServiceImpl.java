@@ -36,8 +36,8 @@ public class UserServiceImpl extends DaoSupportImpl<User> implements UserService
 	 */
 	public User getUserByUserName(String userName) {
 		Session session = getSession();
-		Query query = session.createQuery("from User as u where u.userName=:userName");
-		query.setString("userName", userName);
+		Query query = session.createQuery("from User as u where u.loginName=:loginName");
+		query.setString("loginName", userName);
 		User user = (User)query.uniqueResult();
 		return user;
 	}

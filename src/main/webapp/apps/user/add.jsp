@@ -14,15 +14,25 @@
 <script type="text/javascript">
 $(function() {
     $('#password').password();
-    $("#userName").on("blur" function(){
+    $("#userName").on("blur", function(){
     	var userName = $("#userName").val();
-    	$.post({
-    		url: "/userjson/getUser.do" ,
-    		data: {"userName":userName} ,
-    		success: function(json){
-    			
-    	    }
-    	});
+    	$.ajax({
+			url:'/userjson/getUser.do',
+			data:{userName:$('#userName').val()},
+			type:'post',
+			success:function(json){
+				var result = json.result;
+				if(result == '已存在'){
+					$("#userName").parent().addClass("has-error");
+		    		$("#userName").next().addClass("glyphicon-remove");
+				}else{
+					$("#userName").parent().removeClass("has-error");
+		    		$("#userName").parent().addClass("has-success");
+		    		$("#userName").next().removeClass("glyphicon-remove");
+		    		$("#userName").next().addClass("glyphicon-ok");
+				}
+			}
+		});
     });
     $("#password2").on("keyup", function(){
     	console.log("psw"+$("#password").val());

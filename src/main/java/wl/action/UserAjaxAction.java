@@ -31,7 +31,7 @@ public class UserAjaxAction extends ActionSupport {
 		}else{
 			result = "不存在";
 		}
-		return null;
+		return SUCCESS;
 	}
 
 	public String getUserName() {
