@@ -28,4 +28,10 @@
 			<result name="toList" type="redirect">list.do</result>
 		</action>
 	</package>
+	<!-- json data -->
+	<package name="userjson" namespace="/userjson" extends="json-default"><!-- 拦截器中验证是否登陆 -->
+		<action name="getUser" class="userAjaxAction" method="getUser">
+			<result type="json"></result>
+		</action>
+	</package>
 </struts>

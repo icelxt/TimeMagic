@@ -30,4 +30,15 @@ public class UserServiceImpl extends DaoSupportImpl<User> implements UserService
 	/**
 	 * 写判断 拼接更新属性？
 	 */
+
+	/**
+	 * 根据用户名返回用户
+	 */
+	public User getUserByUserName(String userName) {
+		Session session = getSession();
+		Query query = session.createQuery("from User as u where u.userName=:userName");
+		query.setString("userName", userName);
+		User user = (User)query.uniqueResult();
+		return user;
+	}
 }
