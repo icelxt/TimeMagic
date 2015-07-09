@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.mail.MessagingException;
 
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
@@ -13,6 +14,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import wl.entity.User;
 import wl.service.UserService;
+import wl.utils.SendMail;
 
 @Controller
 @Scope("prototype")
@@ -28,7 +30,9 @@ public class UserAction extends ActionSupport {
 	private User user;
 	private String id;
 
-	public String add() {
+	public String add() throws MessagingException {
+//		SendMail sm = new SendMail();
+//		sm.send();
 		return "add";
 	}
 

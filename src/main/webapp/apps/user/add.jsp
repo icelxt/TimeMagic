@@ -11,29 +11,10 @@
 <script type='text/javascript' src='/webjars/jquery/1.11.1/jquery.min.js'></script>
 <script type='text/javascript' src='/webjars/bootstrap/3.3.4/js/bootstrap.min.js'></script>
 <script type='text/javascript' src='/apps/js/password.js'></script>
+<script type='text/javascript' src="/apps/js/bootstrapValidator.min.js"></script>
 <script type="text/javascript">
 $(function() {
     $('#password').password();
-    $("#userName").on("blur", function(){
-    	var userName = $("#userName").val();
-    	$.ajax({
-			url:'/userjson/getUser.do',
-			data:{userName:$('#userName').val()},
-			type:'post',
-			success:function(json){
-				var result = json.result;
-				if(result == '已存在'){
-					$("#userName").parent().addClass("has-error");
-		    		$("#userName").next().addClass("glyphicon-remove");
-				}else{
-					$("#userName").parent().removeClass("has-error");
-		    		$("#userName").parent().addClass("has-success");
-		    		$("#userName").next().removeClass("glyphicon-remove");
-		    		$("#userName").next().addClass("glyphicon-ok");
-				}
-			}
-		});
-    });
     $("#password2").on("keyup", function(){
     	console.log("psw"+$("#password").val());
     	console.log("psw2"+$("#password2").val());
@@ -41,26 +22,94 @@ $(function() {
     		$("#password2").parent().addClass("has-error");
     		$("#password2").next().addClass("glyphicon-remove");
     		$("#password2").attr("title","两次密码不一样");
+    		$("#submit").attr("disabled",true);
     	}else{
     		$("#password2").parent().removeClass("has-error");
     		$("#password2").parent().addClass("has-success");
     		$("#password2").next().removeClass("glyphicon-remove");
     		$("#password2").next().addClass("glyphicon-ok");
     		$("#password2").attr("title","");
+    		$("#submit").attr("disabled",false);
     	}
     });
     $("[data-toggle='tooltip']").tooltip();
+    $('.registerForm').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+        	'user.loginName': {
+                message: 'The username is not valid',
+                validators: {
+                    /* notEmpty: {
+                        message: '用户名不能空'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: '用户名长度为6-30'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_]+$/,
+                        message: 'The username can only consist of alphabetical, number and underscore'
+                    } */
+                    notEmpty: {
+                        message: '用户名不能空，使用邮箱注册。例如：admin@timemagic.cn'
+                    },
+                    /* emailAddress: {
+                        message: '请输入正确的邮箱地址'
+                    }, */
+                    stringLength: {
+                        min: 10,
+                        max: 50,
+                        message: '长度尽量不要超过50个字符'
+                    },
+                    regexp: {
+                        regexp: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,
+                        message: '请输入正确的邮箱地址'
+                    }
+                }
+            }
+        }
+    });
+    $("#userName").on("blur", function(){
+    	
+    	if($("#userName").parent().hasClass("has-error")){
+    	}else{
+    		var userName = $("#userName").val();
+    		$.ajax({
+				url:'/userjson/getUser.do',
+				data:{userName:$('#userName').val()},
+				type:'post',
+				success:function(json){
+					var result = json.result;
+					if(result == '已存在'){
+						$("#userName").parent().addClass("has-error");
+			   	 		$("#userName").next().addClass("glyphicon-remove");
+		   		 		$("#submit").attr("disabled",true);
+					}else{
+						$("#userName").parent().removeClass("has-error");
+				    	$("#userName").next().removeClass("glyphicon-remove");
+			    		$("#submit").attr("disabled",false);
+					}
+				}
+			});
+    	}
+    });
 });
 </script>
 <title>添加</title>
 </head>
 <body style="background-image:url(/image/bg01.gif);">
 	<div class="container">
-		<s:form action="save.do">
-		<div style="position:fixed;left:40%;top:30%;margin-left:width/2;margin-top:height/2;width: 500px;">
+		<s:form action="save.do" cssClass="registerForm">
+		<div style="position:fixed;left:30%;top:20%;margin-left:width/2;margin-top:height/2;width: 500px;">
 			<div class="form-group has-feedback">
-				<label for="userName">用户名</label>
-				<s:textfield id="userName" name="user.loginName" cssClass="form-control" placeholder="用户名"></s:textfield>
+				<label for="userName">用户名(邮箱注册)</label>
+				<s:textfield id="userName" name="user.loginName" cssClass="form-control" placeholder="邮箱注册"></s:textfield>
 				<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 			</div>
 			<div class="form-group has-feedback">
@@ -84,7 +133,7 @@ $(function() {
 				<label for="mobile">电话</label>
 				<s:textfield id="mobile" name="user.mobile" cssClass="form-control" placeholder="电话"/>
 			</div>
-			<s:submit cssClass="btn btn-success" value="注册" />
+			<s:submit id="submit" cssClass="btn btn-success" value="注册" />
 		</div>
 		</s:form>
 	</div>
