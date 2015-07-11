@@ -43,6 +43,7 @@ public class UserAction extends ActionSupport {
 	public String save() {
 		Calendar calendar = Calendar.getInstance();
 		user.setCreateTime(calendar.getTime());
+		user.setIdentity("member");
 		//TODO以后通过时间控件赋值
 		user.setBirthday(calendar.getTime());
 		userService.save(user);

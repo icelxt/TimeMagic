@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -34,7 +36,10 @@ public class User {
 	@Column(name = "birthday")
 	private Date birthday;
 	@Column(name = "create_time")
+	@Temporal(TemporalType.TIMESTAMP)//date年月日、time时分秒
 	private Date createTime;
+	@Column(name = "identity")
+	private String identity;
 
 	public String getId() {
 		return id;
@@ -98,6 +103,14 @@ public class User {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public String getIdentity() {
+		return identity;
+	}
+
+	public void setIdentity(String identity) {
+		this.identity = identity;
 	}
 
 	@Override
