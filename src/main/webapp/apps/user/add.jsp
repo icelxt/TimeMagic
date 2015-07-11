@@ -21,18 +21,18 @@ $(function() {
     	if($("#password").val() != $("#password2").val()){
     		$("#password2").parent().addClass("has-error");
     		$("#password2").next().addClass("glyphicon-remove");
-    		$("#password2").attr("title","两次密码不一样");
-    		$("#submit").attr("disabled",true);
+    		/* $("#password2").attr("title","两次密码不一样"); */
+    		$("#subm").attr("disabled",true);
     	}else{
     		$("#password2").parent().removeClass("has-error");
     		$("#password2").parent().addClass("has-success");
     		$("#password2").next().removeClass("glyphicon-remove");
     		$("#password2").next().addClass("glyphicon-ok");
-    		$("#password2").attr("title","");
-    		$("#submit").attr("disabled",false);
+    		/* $("#password2").attr("title",""); */
+    		$("#subm").attr("disabled",false);
     	}
     });
-    $("[data-toggle='tooltip']").tooltip();
+    /* $("[data-toggle='tooltip']").tooltip(); */
     $('.registerForm').bootstrapValidator({
         message: 'This value is not valid',
         feedbackIcons: {
@@ -74,7 +74,18 @@ $(function() {
                 }
             }
         }
-    });
+    })
+    /* .on('success.form.bv', function(e) {
+        // Prevent submit form
+        //e.preventDefault();
+        var $form     = $(e.target),
+            validator = $form.data('bootstrapValidator');
+        //$form.find('.alert').html('Thanks for signing up. Now you can sign in as ' + validator.getFieldElements('user.loginName').val()).show();
+        console.log($form.context);
+        console.log(e);
+        e.submit();
+        //$form.context.submit();
+    }) */;
     $("#userName").on("blur", function(){
     	
     	if($("#userName").parent().hasClass("has-error")){
@@ -89,11 +100,11 @@ $(function() {
 					if(result == '已存在'){
 						$("#userName").parent().addClass("has-error");
 			   	 		$("#userName").next().addClass("glyphicon-remove");
-		   		 		$("#submit").attr("disabled",true);
+		   		 		$("#subm").attr("disabled",true);
 					}else{
 						$("#userName").parent().removeClass("has-error");
 				    	$("#userName").next().removeClass("glyphicon-remove");
-			    		$("#submit").attr("disabled",false);
+			    		$("#subm").attr("disabled",false);
 					}
 				}
 			});
@@ -106,6 +117,7 @@ $(function() {
 <body style="background-image:url(/image/bg01.gif);">
 	<div class="container">
 		<s:form action="save.do" cssClass="registerForm">
+		<!-- <div class="alert alert-success" style="display: none;"></div> -->
 		<div style="position:fixed;left:30%;top:20%;margin-left:width/2;margin-top:height/2;width: 500px;">
 			<div class="form-group has-feedback">
 				<label for="userName">用户名(邮箱注册)</label>
@@ -133,7 +145,8 @@ $(function() {
 				<label for="mobile">电话</label>
 				<s:textfield id="mobile" name="user.mobile" cssClass="form-control" placeholder="电话"/>
 			</div>
-			<s:submit id="submit" cssClass="btn btn-success" value="注册" />
+			<!-- <button type="submit" class="btn btn-primary" name="reg">注册</button> -->
+			<s:submit id="subm" cssClass="btn btn-primary" value="注册"></s:submit>
 		</div>
 		</s:form>
 	</div>

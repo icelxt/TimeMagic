@@ -11,9 +11,11 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import wl.entity.User;
+
 public class SendMail {
 
-	public String send() throws MessagingException {
+	public static void send(String user, String psw, User touesr) throws MessagingException {
 		// 配置发送邮件的环境属性
 		final Properties props = new Properties();
 		/*
@@ -22,11 +24,11 @@ public class SendMail {
 		 */
 		// 表示SMTP发送邮件，需要进行身份验证
 		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.host", "smtp.163.com");
+		props.put("mail.smtp.host", "smtp.sina.com");
 		// 发件人的账号
-		props.put("mail.user", "");
+		props.put("mail.user", user);
 		// 访问SMTP服务时需要提供的密码
-		props.put("mail.password", "");
+		props.put("mail.password", psw);
 
 		// 构建授权信息，用于进行SMTP进行身份验证
 		Authenticator authenticator = new Authenticator() {
@@ -47,7 +49,7 @@ public class SendMail {
 		message.setFrom(form);
 
 		// 设置收件人
-		InternetAddress to = new InternetAddress("");
+		InternetAddress to = new InternetAddress(touesr.getLoginName());
 		message.setRecipient(RecipientType.TO, to);
 
 		// 设置抄送
@@ -59,13 +61,12 @@ public class SendMail {
 //		message.setRecipient(RecipientType.CC, bcc);
 
 		// 设置邮件标题
-		message.setSubject("测试邮件");
+		message.setSubject("[TimeMagic]邮箱验证");
 
 		// 设置邮件的内容体
-		message.setContent("测试的HTML邮件", "text/html;charset=UTF-8");
+		message.setContent("<p>你好, "+touesr.getName()+" 先生 :</p><h2>感谢您使用TimeMagic服务。</h2><h3>请点击以下链接进行邮箱验证，以便开始使用您的TimeMagic账号</h3><h3>如果您无法点击以上链接，请复制以下网址到浏览器里直接打开</h3><blockquote><p>连接有效期为48小时。</p><p>如果您并未申请TimeMagic账号，可能是其他用户误输入了您的邮箱地址。请忽略此邮件，或与我们联系。</p></blockquote>", "text/html;charset=UTF-8");
 
 		// 发送邮件
 		Transport.send(message);
-		return "finished";
 	}
 }

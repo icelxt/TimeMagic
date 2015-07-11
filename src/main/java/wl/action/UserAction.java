@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import javax.mail.MessagingException;
 
 import org.apache.struts2.ServletActionContext;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -30,9 +31,12 @@ public class UserAction extends ActionSupport {
 	private User user;
 	private String id;
 
-	public String add() throws MessagingException {
-//		SendMail sm = new SendMail();
-//		sm.send();
+	@Value("#{email.user}")
+	private String _user;
+	@Value("#{email.psw}")
+	private String _psw;
+
+	public String add() {
 		return "add";
 	}
 
@@ -42,6 +46,12 @@ public class UserAction extends ActionSupport {
 		//TODO以后通过时间控件赋值
 		user.setBirthday(calendar.getTime());
 		userService.save(user);
+		try {
+			SendMail.send(_user, _psw, user);
+		} catch (MessagingException e) {
+			System.out.println("UserAction.save()...发送邮件验证失败！");
+			e.printStackTrace();
+		}
 		return "toList";
 	}
 

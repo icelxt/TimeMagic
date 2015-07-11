@@ -46,10 +46,14 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.35</version>
 		</dependency>
+		<!-- c3p0连接池 -->
+		<!-- <dependency> <groupId>com.mchange</groupId> <artifactId>c3p0</artifactId> 
+			<version>0.9.5.1</version> </dependency> -->
+		<!-- druid连接池 -->
 		<dependency>
-			<groupId>com.mchange</groupId>
-			<artifactId>c3p0</artifactId>
-			<version>0.9.5.1</version>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.0.15</version>
 		</dependency>
 		<!-- 添加Log4J依赖 -->
 		<!-- <dependency> <groupId>log4j</groupId> <artifactId>log4j</artifactId> 
