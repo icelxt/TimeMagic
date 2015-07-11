@@ -14,7 +14,10 @@ import org.springframework.stereotype.Controller;
 import com.opensymphony.xwork2.ActionSupport;
 
 import wl.entity.User;
+import wl.entity.UserReg;
+import wl.service.UserRegService;
 import wl.service.UserService;
+import wl.utils.MD5Util;
 import wl.utils.SendMail;
 
 @Controller
@@ -28,6 +31,8 @@ public class UserAction extends ActionSupport {
 
 	@Resource
 	private UserService userService;
+	@Resource
+	private UserRegService userRegService;
 	private User user;
 	private String id;
 
@@ -46,9 +51,15 @@ public class UserAction extends ActionSupport {
 		user.setIdentity("member");
 		//TODO以后通过时间控件赋值
 		user.setBirthday(calendar.getTime());
+		user.setPassWord(MD5Util.string2MD5(user.getPassWord()));
 		userService.save(user);
+		UserReg userReg = new UserReg();
+		userReg.setLoginName(user.getLoginName());
+		userReg.setRegTime(calendar.getTime());
+		userReg.setReg(userReg.getLoginName()+",|,"+userReg.getRegTime().toString());
+		userRegService.save(userReg);
 		try {
-			SendMail.send(_user, _psw, user);
+			SendMail.send(_user, _psw, user,userReg.getReg());
 		} catch (MessagingException e) {
 			System.out.println("UserAction.save()...发送邮件验证失败！");
 			e.printStackTrace();

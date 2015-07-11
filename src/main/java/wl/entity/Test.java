@@ -8,9 +8,6 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "t_demo")
 public class Test {
 
-//	@Id
-//	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-//	@Column(name = "id", unique = true, nullable = false)
 	@Id
 	@GeneratedValue(generator = "idGenerator")
 	@GenericGenerator(name = "idGenerator", strategy = "uuid")
