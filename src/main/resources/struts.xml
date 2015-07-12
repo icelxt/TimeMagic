@@ -11,7 +11,7 @@
 	<!-- 把主题设为simple -->
 	<constant name="struts.ui.theme" value="simple" />
 	<constant name="struts.i18n.encoding" value="UTF-8" />
-	<constant name="struts.objectFactory" value="spring"/>
+	<constant name="struts.objectFactory" value="spring" />
 	<package name="test" namespace="/test" extends="struts-default">
 		<action name="*" class="testAction" method="{1}">
 			<result name="add">/apps/test/add.jsp</result>
@@ -21,17 +21,48 @@
 		</action>
 	</package>
 	<package name="user" namespace="/user" extends="struts-default"><!-- 拦截器中验证是否登陆 -->
+		<!-- 定义一个拦截器 -->
+		<interceptors>
+			<interceptor name="authority"
+				class="wl.action.interceptor.LoginInterceptor">
+			</interceptor>
+			<!-- 拦截器栈 -->
+			<interceptor-stack name="isLogin">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="authority" />
+			</interceptor-stack>
+		</interceptors>
 		<action name="*" class="userAction" method="{1}">
 			<result name="add">/apps/user/add.jsp</result>
 			<result name="edit">/apps/user/edit.jsp</result>
 			<result name="list">/apps/user/list.jsp</result>
 			<result name="toList" type="redirect">list.do</result>
+			<interceptor-ref name="isLogin">
+				<param name="includeMethods">edit,list</param>
+			</interceptor-ref>
 		</action>
 	</package>
 	<!-- json data -->
 	<package name="userjson" namespace="/userjson" extends="json-default"><!-- 拦截器中验证是否登陆 -->
 		<action name="getUser" class="userAjaxAction" method="getUser">
 			<result type="json"></result>
+		</action>
+	</package>
+	<!-- Login -->
+	<package name="login" namespace="/login" extends="json-default"><!-- 拦截器中验证是否登陆 -->
+		<!-- 定义一个拦截器 -->
+		<interceptors>
+			<interceptor name="utilsmd5" class="wl.action.interceptor.MD5Interceptor">
+			</interceptor>
+			<!-- 拦截器栈 -->
+			<interceptor-stack name="psw2md5">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="utilsmd5" />
+			</interceptor-stack>
+		</interceptors>
+		<action name="login" class="loginAction" method="login">
+			<result>/apps/user/list.jsp</result>
+			<interceptor-ref name="psw2md5"/>
 		</action>
 	</package>
 </struts>
