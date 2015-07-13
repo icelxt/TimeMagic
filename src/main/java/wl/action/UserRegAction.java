@@ -16,7 +16,7 @@ import wl.entity.User;
 import wl.entity.UserReg;
 import wl.service.UserRegService;
 import wl.service.UserService;
-import wl.utils.Base64Coding;
+import wl.utils.Base64Util;
 import wl.utils.SendMail;
 
 @Controller
@@ -43,7 +43,7 @@ public class UserRegAction extends ActionSupport {
 		if(StringUtils.isBlank(user_reg)){
 			return ERROR;
 		}
-		String decrypt = Base64Coding.Decrypt(user_reg);
+		String decrypt = Base64Util.Decrypt(user_reg);
 		String[] split = decrypt.split(",|,");
 		UserReg userReg = userRegService.getUserByLoginName(split[0]);
 		if(userReg!=null){

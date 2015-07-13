@@ -44,25 +44,36 @@
 	</package>
 	<!-- json data -->
 	<package name="userjson" namespace="/userjson" extends="json-default"><!-- 拦截器中验证是否登陆 -->
-		<action name="getUser" class="userAjaxAction" method="getUser">
+		<action name="*" class="userAjaxAction" method="{1}">
 			<result type="json"></result>
 		</action>
 	</package>
 	<!-- Login -->
 	<package name="login" namespace="/login" extends="json-default"><!-- 拦截器中验证是否登陆 -->
 		<!-- 定义一个拦截器 -->
-		<interceptors>
+		<!-- <interceptors>
 			<interceptor name="utilsmd5" class="wl.action.interceptor.MD5Interceptor">
 			</interceptor>
-			<!-- 拦截器栈 -->
 			<interceptor-stack name="psw2md5">
 				<interceptor-ref name="defaultStack" />
 				<interceptor-ref name="utilsmd5" />
 			</interceptor-stack>
+		</interceptors> -->
+		<interceptors>
+			<interceptor name="utilsrsa" class="wl.action.interceptor.RSAInterceptor">
+			</interceptor>
+			<interceptor-stack name="psw2rsa">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="utilsrsa" />
+			</interceptor-stack>
 		</interceptors>
+		<action name="in" class="loginAction" method="in">
+			<result>/apps/index.jsp</result>
+			<!-- <interceptor-ref name="psw2md5"/> -->
+			<interceptor-ref name="psw2rsa"/>
+		</action>
 		<action name="login" class="loginAction" method="login">
-			<result>/apps/user/list.jsp</result>
-			<interceptor-ref name="psw2md5"/>
+			<result>/apps/login.jsp</result>
 		</action>
 	</package>
 </struts>
