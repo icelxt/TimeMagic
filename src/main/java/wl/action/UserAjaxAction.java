@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.json.annotations.JSON;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -33,6 +34,7 @@ public class UserAjaxAction extends ActionSupport {
 	private String psw;
 	private String key;
 
+	@JSON(serialize=false)
 	public String getUser() {
 		User user = userService.getUserByUserName(userName);
 		if (user != null) {
@@ -43,6 +45,7 @@ public class UserAjaxAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	@JSON(serialize=false)
 	public String getPsw() {
 		if (StringUtils.isNotBlank(psw)) {
 //			RSAPublicKey publicKey = (RSAPublicKey) ServletActionContext.getRequest().getAttribute("publicKey");
@@ -54,10 +57,11 @@ public class UserAjaxAction extends ActionSupport {
 //			}
 //			String modulus = publicKey.getModulus().toString();
 //			String public_exponent = publicKey.getPublicExponent().toString();
+			key = Base64Util.Decrypt(key);
 			String[] split = key.split(",");
 			RSAPublicKey pubKey = RSAUtil.getPublicKey(split[1], split[0]);
 			try {
-				psw = RSAUtil.encryptByPublicKey(MD5Util.string2MD5(psw), pubKey);
+				result = RSAUtil.encryptByPublicKey(MD5Util.string2MD5(psw), pubKey);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

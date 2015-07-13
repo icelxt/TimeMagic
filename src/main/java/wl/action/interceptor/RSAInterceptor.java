@@ -27,9 +27,8 @@ public class RSAInterceptor extends AbstractInterceptor {
 		HttpServletRequest request= (HttpServletRequest) ctx.get(StrutsStatics.HTTP_REQUEST);
 		ValueStack stack = ctx.getValueStack();
 		RSAPrivateKey privateKey = (RSAPrivateKey)ServletActionContext.getRequest().getSession().getAttribute("privateKey");
-		String key = request.getParameter("key");
-		String[] split = key.split(",");
-		String psw = RSAUtil.decryptByPrivateKey(split[1], privateKey);
+		String str = request.getParameter("psw");
+		String psw = RSAUtil.decryptByPrivateKey(str, privateKey);
 		stack.setParameter("psw", psw);
 		return invocation.invoke();
 	}

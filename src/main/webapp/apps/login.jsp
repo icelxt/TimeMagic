@@ -13,7 +13,7 @@
 $(function() {
     $('#password').password();
     $("#subm").on("click", function(){
-    	if($("#password").val() == null){
+    	if($("#password").val() == ""){
     		alert("error!");
     		return ;
     	}
@@ -22,11 +22,11 @@ $(function() {
 			data:{psw:$('#password').val(),key:$('#key').val()},
 			type:'post',
 			success:function(json){
-				var result = json.psw;
-				$("#password").val(json.psw);
+				var result = json.result;
+				$("#password").val(json.result);
 			}
 		});
-    	//$("#subm").submit();
+    	$("#subm").submit();
     });
 });
 </script>
@@ -34,8 +34,8 @@ $(function() {
 </head>
 <body>
 	<div class="container">
-	<s:form action="/login/in.do">
 	<div style="position:fixed;left:30%;top:20%;margin-left:width/2;margin-top:height/2;width: 300px;">
+	<s:form action="/login/in.do">
 		<div class="form-group has-feedback">
 			<label for="userName">用户名</label>
 			<s:textfield id="userName" name="loginName" cssClass="form-control" placeholder="用户名"></s:textfield>
@@ -45,10 +45,10 @@ $(function() {
 			<label for="password">密码</label>
 			<s:password id="password" name="psw" cssClass="form-control" placeholder="密码" />
 		</div>
-		<button id="subm" class="btn btn-success" value="Login"></button>
-	</div>
+	<button id="subm" class="btn btn-success">Login</button>
 	<s:hidden id="key" name="key" value="%{#request.publicKey}"></s:hidden>
 	</s:form>
+	</div>
 	</div>
 </body>
 </html>
