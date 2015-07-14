@@ -35,6 +35,9 @@
 		<global-results>
 			<result name="login" type="redirect">/login/login.do</result>
 		</global-results>
+		<action name="save" class="userAction" method="save">
+			<result >/apps/user/add.jsp</result>
+		</action>
 		<action name="add" class="userAction" method="add">
 			<result name="add">/apps/user/add.jsp</result>
 		</action>

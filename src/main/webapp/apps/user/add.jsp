@@ -6,12 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel='stylesheet'
-	href='/webjars/bootstrap/3.3.4/css/bootstrap.min.css'>
+<link rel='stylesheet' href='/webjars/bootstrap/3.3.4/css/bootstrap.min.css'>
+<link href="/apps/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 <script type='text/javascript' src='/webjars/jquery/1.11.1/jquery.min.js'></script>
 <script type='text/javascript' src='/webjars/bootstrap/3.3.4/js/bootstrap.min.js'></script>
 <script type='text/javascript' src='/apps/js/password.js'></script>
 <script type='text/javascript' src="/apps/js/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="/apps/js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/apps/js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 <script type="text/javascript">
 $(function() {
     $('#password').password();
@@ -87,7 +89,6 @@ $(function() {
         //$form.context.submit();
     }) */;
     $("#userName").on("blur", function(){
-    	
     	if($("#userName").parent().hasClass("has-error")){
     	}else{
     		var userName = $("#userName").val();
@@ -110,13 +111,24 @@ $(function() {
 			});
     	}
     });
+    $('#datetimepicker').datetimepicker({
+    	language:  'zh-CN',
+    	weekStart: 1,//星期一
+        todayBtn:  1,
+		autoclose: false,//自动关闭
+		todayHighlight: true,
+		startView: 2,
+		minView: 2,//最小单位，2是日
+		forceParse: false,
+        format: 'yyyy-mm-dd'
+    });
 });
 </script>
 <title>添加</title>
 </head>
 <body style="background-image:url(/image/bg01.gif);">
 	<div class="container">
-		<s:form action="save" namespace="/user" cssClass="registerForm">
+		<s:form action="save" namespace="/user" cssClass="registerForm" role="form">
 		<!-- <div class="alert alert-success" style="display: none;"></div> -->
 		<div style="position:fixed;left:30%;top:20%;margin-left:width/2;margin-top:height/2;width: 500px;">
 			<div class="form-group has-feedback">
@@ -136,6 +148,10 @@ $(function() {
 			<div class="form-group has-feedback">
 				<label for="name">姓名</label>
 				<s:textfield id="name" name="user.name" cssClass="form-control" placeholder="姓名"/>
+			</div>
+			<div class="input-group date form_date col-md-5" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+				<label for="name">出生日期</label>
+				<s:textfield id="datetimepicker" name="user.birthday" cssClass="form-control" placeholder="出生日期"/>
 			</div>
 			<div class="form-group has-feedback">
 				<label for="address">地址</label>
