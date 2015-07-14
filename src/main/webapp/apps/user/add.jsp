@@ -115,7 +115,7 @@ $(function() {
     	language:  'zh-CN',
     	weekStart: 1,//星期一
         todayBtn:  1,
-		autoclose: false,//自动关闭
+		autoclose: true,//自动关闭
 		todayHighlight: true,
 		startView: 2,
 		minView: 2,//最小单位，2是日
@@ -148,18 +148,22 @@ $(function() {
 			<div class="form-group has-feedback">
 				<label for="name">姓名</label>
 				<s:textfield id="name" name="user.name" cssClass="form-control" placeholder="姓名"/>
+				<span class="glyphicon glyphicon-user form-control-feedback" aria-hidden="true"></span>
 			</div>
-			<div class="input-group date form_date col-md-5" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+			<div class="form-group has-feedback">
 				<label for="name">出生日期</label>
 				<s:textfield id="datetimepicker" name="user.birthday" cssClass="form-control" placeholder="出生日期"/>
+				<span class="glyphicon glyphicon-calendar form-control-feedback" aria-hidden="true"></span>
 			</div>
 			<div class="form-group has-feedback">
 				<label for="address">地址</label>
 				<s:textfield id="address" name="user.address" cssClass="form-control" placeholder="地址"/>
+				<span class="glyphicon glyphicon-home form-control-feedback" aria-hidden="true"></span>
 			</div>
 			<div class="form-group has-feedback">
 				<label for="mobile">电话</label>
 				<s:textfield id="mobile" name="user.mobile" cssClass="form-control" placeholder="电话"/>
+				<span class="glyphicon glyphicon-earphone form-control-feedback" aria-hidden="true"></span>
 			</div>
 			<!-- <button type="submit" class="btn btn-primary" name="reg">注册</button> -->
 			<s:submit id="subm" cssClass="btn btn-primary" value="注册"></s:submit>

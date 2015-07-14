@@ -37,13 +37,13 @@ $(function() {
 	<div class="container">
 	<div style="position:fixed;left:30%;top:20%;margin-left:width/2;margin-top:height/2;width: 300px;">
 	<s:form action="indo" namespace="/login">
-		<div class="form-group has-feedback">
-			<label for="userName">用户名</label>
+		<div class="form-group has-feedback input-group">
+			<div class="input-group-addon"><i class="glyphicon glyphicon-user"></i></div>
 			<s:textfield id="userName" name="loginName" cssClass="form-control" placeholder="用户名"></s:textfield>
 			<span class="glyphicon form-control-feedback"></span>
 		</div>
-		<div class="form-group has-feedback">
-			<label for="password">密码</label>
+		<div class="form-group has-feedback input-group">
+			<div class="input-group-addon"><i class="glyphicon glyphicon-asterisk"></i></div>
 			<s:password id="password" name="psw" cssClass="form-control" placeholder="密码" />
 		</div>
 	<button id="subm" class="btn btn-success">Login</button>
