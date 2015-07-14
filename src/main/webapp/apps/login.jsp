@@ -21,9 +21,10 @@ $(function() {
 			url:'/userjson/getPsw.do',
 			data:{psw:$('#password').val(),key:$('#key').val()},
 			type:'post',
+			async:false,
 			success:function(json){
 				var result = json.result;
-				$("#password").val(json.result);
+				$("#password").val(result);
 			}
 		});
     	$("#subm").submit();
@@ -35,7 +36,7 @@ $(function() {
 <body>
 	<div class="container">
 	<div style="position:fixed;left:30%;top:20%;margin-left:width/2;margin-top:height/2;width: 300px;">
-	<s:form action="/login/in.do">
+	<s:form action="indo" namespace="/login">
 		<div class="form-group has-feedback">
 			<label for="userName">用户名</label>
 			<s:textfield id="userName" name="loginName" cssClass="form-control" placeholder="用户名"></s:textfield>

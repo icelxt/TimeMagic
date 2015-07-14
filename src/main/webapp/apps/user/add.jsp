@@ -116,7 +116,7 @@ $(function() {
 </head>
 <body style="background-image:url(/image/bg01.gif);">
 	<div class="container">
-		<s:form action="save.do" cssClass="registerForm">
+		<s:form action="save" namespace="/user" cssClass="registerForm">
 		<!-- <div class="alert alert-success" style="display: none;"></div> -->
 		<div style="position:fixed;left:30%;top:20%;margin-left:width/2;margin-top:height/2;width: 500px;">
 			<div class="form-group has-feedback">

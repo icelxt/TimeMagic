@@ -32,14 +32,23 @@
 				<interceptor-ref name="authority" />
 			</interceptor-stack>
 		</interceptors>
-		<action name="*" class="userAction" method="{1}">
+		<global-results>
+			<result name="login" type="redirect">/login/login.do</result>
+		</global-results>
+		<action name="add" class="userAction" method="add">
 			<result name="add">/apps/user/add.jsp</result>
+		</action>
+		<action name="edit" class="userAction" method="edit">
 			<result name="edit">/apps/user/edit.jsp</result>
-			<result name="list">/apps/user/list.jsp</result>
-			<result name="toList" type="redirect">list.do</result>
-			<interceptor-ref name="isLogin">
-				<param name="includeMethods">edit,list</param>
-			</interceptor-ref>
+			<interceptor-ref name="isLogin"></interceptor-ref>
+		</action>
+		<action name="list" class="userAction" method="list">
+			<result name="add">/apps/user/add.jsp</result>
+			<interceptor-ref name="isLogin"></interceptor-ref>
+		</action>
+		<action name="toList" class="userAction" method="toList">
+			<result name="add">/apps/user/add.jsp</result>
+			<interceptor-ref name="isLogin"></interceptor-ref>
 		</action>
 	</package>
 	<!-- json data -->
@@ -49,7 +58,7 @@
 		</action>
 	</package>
 	<!-- Login -->
-	<package name="login" namespace="/login" extends="json-default"><!-- 拦截器中验证是否登陆 -->
+	<package name="login" namespace="/login" extends="struts-default"><!-- 拦截器中验证是否登陆 -->
 		<!-- 定义一个拦截器 -->
 		<!-- <interceptors>
 			<interceptor name="utilsmd5" class="wl.action.interceptor.MD5Interceptor">
@@ -67,7 +76,7 @@
 				<interceptor-ref name="utilsrsa" />
 			</interceptor-stack>
 		</interceptors>
-		<action name="in" class="loginAction" method="in">
+		<action name="indo" class="loginAction" method="indo">
 			<result>/apps/index.jsp</result>
 			<!-- <interceptor-ref name="psw2md5"/> -->
 			<interceptor-ref name="psw2rsa"/>

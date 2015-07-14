@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="container">
-	<s:form action="update.do">
+	<s:form action="update" namespace="/user">
 		<table>
 			<tr>
 				<td>用户名:</td>

@@ -33,7 +33,7 @@ public class LoginAction extends ActionSupport {
 	private String psw;
 	private User user;
 
-	public String in() {
+	public String indo() {
 		user = (User)ServletActionContext.getRequest().getSession().getAttribute("user");
 		if(user == null){
 			user = userService.getUserByUserName(loginName);
@@ -43,7 +43,7 @@ public class LoginAction extends ActionSupport {
 				ActionContext.getContext().getValueStack().push(err);
 				return ERROR;
 			}
-			ServletActionContext.getRequest().getSession().setAttribute("user", user);
+			ActionContext.getContext().getValueStack().push(user);
 		}else{
 			ActionContext.getContext().getValueStack().push(user);
 		}

@@ -15,7 +15,7 @@
 </head>
 <body style="background-image:url(/image/bg01.gif);">
 	<div class="container">
-		<s:form action="save.do">
+		<s:form action="save" namespace="test">
 			<%-- <table>
 			<tr> 
 				<td>用户名:</td>
